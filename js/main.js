@@ -1,12 +1,21 @@
 "use strict";
 
-const vtTimeout = 3000;
+/**
+ * Toast settings
+*/
+// Default time before the toast fades away
+const vtTimeout = 2 * 1000;
 const vtCallback = Function.prototype;
+// Different types of toast notifications
 const vtType = {
   error: "error",
   info: "info",
   success: "success"
 };
+
+/**
+ * List of different commands for the web worker
+ */
 const wwCommands = {
   list: 'list',
   get: 'get',
@@ -81,6 +90,10 @@ function filterAction(data) {
   }
 }
 
+function createToast(params) {
+  VanillaToasts.create(params);
+}
+
 function reportSuccess(params) {
   createToast({
     title: params.title,
@@ -91,16 +104,6 @@ function reportSuccess(params) {
   });
 }
 
-function initCards() {
-  cardsClass = new Cards();
-  cardsClass.onCardDelete = function (elem) {
-    let id = elem.getAttribute('identifier');
-    wworker.postMessage({
-      cmd: wwCommands.delete,
-      val: parseInt(id)
-    });
-  }
-}
 
 ///////////////////////////////////////////////////////
 ////////////// Actions ////////////////
@@ -167,5 +170,37 @@ function closeAction() {
     type: vtType.info,
     timeout: vtTimeout,
     callback: vtCallback
+  });
+}
+
+/*
+  Observe connectivity changes
+ */
+// Feature detection
+if ('ononline' in window && 'onoffline' in window && typeof navigator.onLine === 'boolean'){
+  var networkConnectivityService = new NetworkConnectivityService();
+  var connectivityIndicatorElement = document.getElementById('connectivity-indicator');
+
+  /**
+   * Function to inform the user the connectivity change
+   *
+   * @param connectivityState
+   */
+  var connectivityNotifier = function logConnectivity(connectivityState) {
+    if (connectivityState === 'online') {
+      console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'online :)');
+      connectivityIndicatorElement.className = 'connectivity-online';
+    } else {
+      console.log('%c Connectivity: ', 'color:#000; background-color: orange', 'offline :(');
+      connectivityIndicatorElement.className = 'connectivity-offline';
+    }
+  };
+
+  // Init the connectivity state
+  connectivityNotifier(networkConnectivityService.getCurrentConnectivity());
+
+  // Observe connectivity changes
+  networkConnectivityService.onConnectivityChange(function(state){
+    connectivityNotifier(state);
   });
 }

@@ -7,7 +7,9 @@ var urlsToCache = [
   'manifest.json',
   // js assets
   'js/main.js',
-  'js/view.js',
+  'js/services/NetworkConnectivityService.js',
+  'js/components/CardList.js',
+  'js/components/SideNavBar.js',
   'js/components/ToDoCard.js',
   'js/indexedDB/IndexedDBLayer.js',
   'js/indexedDB/TodoListDB.js',
@@ -17,14 +19,13 @@ var urlsToCache = [
   'js/util/setDefaultTODOs.js',
   // css assets
   'style/css/main.css',
-  'style/vendor/cards.css',
   'style/vendor/vanillatoasts.css',
   // img assets
   'imgs/offline-rex.jpg',
-  // icons
   'imgs/icon/favicon-96x96.png',
   'imgs/icon/favicon-144x144.png',
-  'imgs/icon/favicon-196x196.png'
+  'imgs/icon/favicon-196x196.png',
+  'imgs/plus.svg'
 ];
 
 // used for logging

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width" />
     <link rel="manifest" href="manifest.json">
     <title>Surviving the offline status</title>
     <link rel="shortcut icon" sizes="16x16 32x32 48x48 57x57 64x64 114x114 120x120 144x144 152x152" href="favicon.ico?v=1.0">
@@ -34,7 +35,7 @@
                 display: flex;
                 width: auto;
                 min-height: 120px;
-                font-size: 14px;
+                font-size: 1.1rem;
                 padding: 1rem;
                 margin: 20px 0;
                 position: relative;
@@ -47,7 +48,7 @@
 
             figure h1.header{
                 margin: 0;
-                font-size: 18px;
+                font-size: 1.5rem;
                 max-width: 90%;
             }
 
@@ -63,6 +64,10 @@
             footer.footer{
                 word-break: break-all;
             }
+
+            @media (max-width: 800px) {
+
+            }
         </style>
 
         <!-- HTML -->
@@ -76,14 +81,11 @@
 </head>
 <body class="surviving-offline">
 <header>
-    <h1>Surviving the offline status</h1>
+    <button id="sideNavSwitch" class="side-nav-switch"></button>
+    <h1 alt="Hello there !">Surviving the <span id="connectivity-indicator">offline</span> status</h1>
 </header>
 
 <div class="offline-body">
-    <main class="offline-content">
-        <div class="card-container">
-        </div>
-    </main>
     <nav class="offline-nav">
         <form id="createTODO" class="create-todo-form">
             Name:<br/>
@@ -92,22 +94,28 @@
             <textarea rows="8" name="text" form="createTODO"></textarea><br/><br/>
             E-mail:<br/>
             <input type="text" name="email"><br/><br/>
-            <input type="submit" value="Create TODO">
+            <input type="submit" class="offline-button" value="Create TODO">
         </form>
         <hr>
-        <button id="CleanDB">Clear Database</button>
+        <button id="CleanDB" class="offline-button">Clear Database</button>
     </nav>
+    <main class="offline-content">
+        <div class="card-container">
+        </div>
+    </main>
 </div>
 </body>
 
-
+<!-- Load Style -->
 <link rel="stylesheet" type="text/css" href="style/css/main.css">
-<link rel="stylesheet" type="text/css" href="style/vendor/cards.css">
 <link rel="stylesheet" type="text/css" href="style/vendor/vanillatoasts.css">
+<!-- Load Script -->
 <script src="js/vendor/cards.js"></script>
 <script src="js/vendor/vanillatoasts.js"></script>
+<script src="js/services/NetworkConnectivityService.js"></script>
 <script src="js/components/ToDoCard.js"></script>
-<script src="js/view.js"></script>
+<script src="js/components/CardList.js"></script>
+<script src="js/components/SideNavBar.js"></script>
 <script src="js/main.js"></script>
 <script src="js/util/setDefaultTODOs.js"></script>
 

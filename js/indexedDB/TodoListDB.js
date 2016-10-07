@@ -26,7 +26,7 @@ let TodoListDB = (function () {
   const storeName = Symbol('storeName'); // database name
 
   //used for logging
-  const logTextColor = "white";
+  const logTextColor = "#000";
   const logBackgroundColor = "#1E90FF";
 
   // indexedDB.deleteDatabase("TODOListStore")
@@ -76,7 +76,7 @@ let TodoListDB = (function () {
           // finished before adding data into it.
           todoStore.transaction.oncomplete = function (event) {
             console.log('%c IndexedDB: ', 'color:' + logTextColor + '; background-color: ' + logBackgroundColor, 'Transaction complete.');
-            self[idbLayer] = new IndexedDBLayer(event.target.result, self[storeName]);
+            self[idbLayer] = new IndexedDBLayer(db, self[storeName]);
             resolve();
           };
         };
