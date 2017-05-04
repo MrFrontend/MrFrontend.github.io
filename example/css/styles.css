@@ -274,7 +274,7 @@ h1, h2, h3, h4 {
 
 /* line 28, ../sass/styles.scss */
 header {
-  background: #FFC600;
+  background: #3366CC;
   padding: 1em;
 }
 /* line 31, ../sass/styles.scss */
@@ -306,3 +306,6 @@ footer {
   margin: 20px auto;
   padding: 10px;
 }
+
+.logo{text-align: center;}
+.bol-logo{fill:#fff;width:160px}
